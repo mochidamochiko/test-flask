@@ -1,9 +1,16 @@
-from flask import Flask                           
-app = Flask(__name__)                             
+from flask import Flask
+import os
 
-@app.route('/')                                   
-def hello_world():                                
-    return "Hello World!"                         
+app = Flask(__name__)
 
-if __name__ == '__main__':                        
+@app.route('/', methods=['GET'])
+def hello_world():
+    return "Hello World!"
+
+@app.route('/info', methods=['GET'])
+def info():
+    hostname = os.uname()[1]
+    return "hostname: %s " % hostname
+
+if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
